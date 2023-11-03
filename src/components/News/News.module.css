@@ -1,0 +1,19 @@
+.news {
+    padding: 20px;
+}
+
+.newsItem {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.newsItem h3 {
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.newsItem p {
+    color: #666;
+}

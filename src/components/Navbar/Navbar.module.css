@@ -1,14 +1,25 @@
 .item {
+    padding: 10px;
     color: green;
+    transition: color 0.3s ease-in-out;
 }
+
 .item.active {
     color: red;
+    background-color: #e0e0e0; /* Добавляем подсветку фона для активного элемента */
 }
 
 .sidebar {
     grid-area: sidebar;
     overflow: hidden;
     background-color: aqua;
-
 }
 
+.item a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.item:hover {
+    background-color: #e0e0e0;
+}

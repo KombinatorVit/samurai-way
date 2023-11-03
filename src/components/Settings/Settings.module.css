@@ -1,0 +1,24 @@
+/* Settings.module.css */
+.settings {
+    padding: 20px;
+}
+
+.settingItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.settingItem label {
+    margin-right: 10px;
+}
+
+.saveButton {
+    padding: 10px;
+    color: #fff;
+    background-color: green;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

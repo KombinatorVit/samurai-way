@@ -1,29 +1,44 @@
 import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import styles from './Navbar.module.css';
 
+type NavItemProps = {
+    to: string;
+    currentPath: string;
+    children: React.ReactNode;
+};
+
 const Navbar = () => {
+    const location = useLocation();
     
-    const activeStyle = `${styles.active} ${styles.item}`;
     return (
         <nav className={styles.sidebar}>
-            <div className={activeStyle}>
+            <NavItem to="/profile" currentPath={location.pathname}>
                 Profile
-            </div>
-            <div className={styles.item}>
+            </NavItem>
+            <NavItem to="/message" currentPath={location.pathname}>
                 Message
-            </div>
-            <div className={styles.item}>
+            </NavItem>
+            <NavItem to="/news" currentPath={location.pathname}>
                 News
-            </div>
-            <div className={styles.item}>
+            </NavItem>
+            <NavItem to="/music" currentPath={location.pathname}>
                 Music
-            </div>
-            
-            <div className={styles.item}>
+            </NavItem>
+            <NavItem to="/settings" currentPath={location.pathname}>
                 Settings
-            </div>
+            </NavItem>
         </nav>
+    );
+};
+
+const NavItem: React.FC<NavItemProps> = ({ to, currentPath, children }) => {
+    const isActive = currentPath === to;
     
+    return (
+        <div className={`${isActive ? styles.active : ''} ${styles.item}`}>
+            <Link to={to}>{children}</Link>
+        </div>
     );
 };
 
