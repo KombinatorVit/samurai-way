@@ -1,0 +1,24 @@
+.postItem {
+    padding: 10px;
+    margin: 10px auto;
+    color: deepskyblue;
+    border: 2px solid deepskyblue;
+    border-radius: 5px;
+}
+
+.postContent {
+    display: flex;
+    align-items: center;
+}
+
+.postImage {
+    border-radius: 50%;
+    height: 50px;
+    margin-right: 10px;
+    width: 50px;
+    padding: 5px;
+}
+
+.likeSection {
+    margin-top: 10px;
+}

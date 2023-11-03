@@ -1,0 +1,29 @@
+.myPosts {
+    padding: 10px;
+}
+
+.addPost {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.postInput {
+    flex-grow: 1;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+.btnAddPost {
+    padding: 10px;
+    color: #fff;
+    background-color: deepskyblue;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.posts {
+    /* Добавьте стили для блока с постами, если это необходимо */
+}

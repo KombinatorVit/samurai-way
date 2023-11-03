@@ -14,3 +14,7 @@
 
 
 
+.content {
+    grid-area: content;
+
+}
