@@ -13,25 +13,4 @@
 }
 
 
-.header {
-    grid-area: header;
-    overflow: hidden;
-}
 
-.header .header_img {
-    display: block;
-    width: 100px;
-}
-
-.sidebar {
-    grid-area: sidebar;
-    overflow: hidden;
-    background-color: aqua;
-
-}
-
-.content {
-    grid-area: content;
-    background-color: aquamarine;
-
-}

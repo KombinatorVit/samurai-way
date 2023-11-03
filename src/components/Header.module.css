@@ -1,0 +1,9 @@
+.header {
+    grid-area: header;
+    overflow: hidden;
+}
+
+.header .header_img {
+    display: block;
+    width: 100px;
+}

@@ -1,0 +1,10 @@
+.content {
+    grid-area: content;
+    background-color: aquamarine;
+
+}
+
+.post {
+    padding: 10px;
+
+}

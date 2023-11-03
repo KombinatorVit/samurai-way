@@ -1,8 +1,9 @@
 import React from 'react';
+import styles from './Profile.module.css';
 
 const Profile = () => {
     return (
-        <div className={'content'}>
+        <div className={styles.content}>
             
             <img src="/images.jpeg" alt=""/>
             <div style={{display: 'flex'}}>
@@ -11,7 +12,7 @@ const Profile = () => {
                 <p> Deskr</p>
             </div>
             
-            <div className="post">
+            <div className={styles.post}>
                 My posts
                 <div>
                     New post

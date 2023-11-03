@@ -1,0 +1,14 @@
+.item {
+    color: green;
+}
+.item.active {
+    color: red;
+}
+
+.sidebar {
+    grid-area: sidebar;
+    overflow: hidden;
+    background-color: aqua;
+
+}
+
