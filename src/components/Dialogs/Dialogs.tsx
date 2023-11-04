@@ -1,14 +1,16 @@
 import React from 'react';
 import styles from './Dialogs.module.css';
+import {DialogWindow} from "./DialogWindow";
+import {DialogList} from "./DialogList";
 
-type MessageData = {
+export type MessageData = {
     text: string;
     sender: 'me' | 'them';
     avatar: string;
-    senderName?: string; // Optional property for the sender's name
+    senderName?: string;
 };
 
-type Dialog = {
+export type Dialog = {
     id: number;
     name: string;
     messages: MessageData[];
@@ -16,7 +18,7 @@ type Dialog = {
 
 const Dialogs: React.FC = () => {
     const myName = 'Виталик';
-    const myAvatar = './avaa.jpeg';
+    const myAvatar = '/avaa.jpeg';
     const theirAvatars = [
         'https://placekitten.com/50/50?image=1',
         'https://placekitten.com/50/50?image=2',
@@ -79,52 +81,18 @@ const Dialogs: React.FC = () => {
         },
     ];
     
-    const [activeDialogId, setActiveDialogId] = React.useState<number>(dialogsData[0].id);
+    const [activeDialogId, setActiveDialogId] = React.useState<number>(dialogsData[1].id);
     
     const activeDialog = dialogsData.find(dialog => dialog.id === activeDialogId);
     
     return (
         <div className={styles.dialogsContainer}>
-            <aside className={styles.dialogsList}>
-                <h3>Dialogs</h3>
-                {dialogsData.map(dialog => (
-                    <div
-                        key={dialog.id}
-                        className={`${styles.dialogItem} ${activeDialogId === dialog.id ? styles.active : ''}`}
-                        onClick={() => setActiveDialogId(dialog.id)}
-                    >
-                        <img src={`https://placekitten.com/50/50?image=${dialog.id}`} alt={`${dialog.name}`} className={styles.avatar}/>
-                        <span className={styles.dialogName}>{dialog.name}</span>
-                    </div>
-                ))}
-            </aside>
-            <main className={styles.dialogContent}>
-                <header className={styles.dialogHeader}>
-                    {activeDialog && <h3>{activeDialog.name}</h3>}
-                </header>
-                <div className={styles.messages}>
-                    {activeDialog && activeDialog.messages.map((message, index) => (
-                        <Message key={index} text={message.text} sender={message.sender} avatar={message.avatar} senderName={message.senderName} />
-                    ))}
-                </div>
-            </main>
+            <DialogList dialogs={dialogsData} setActiveDialogId={setActiveDialogId} />
+            <DialogWindow activeDialog={activeDialog} />
         </div>
     );
 };
 
-type MessageProps = {
-    text: string;
-    sender: 'me' | 'them';
-    avatar: string;
-    senderName?: string;
-};
 
-const Message: React.FC<MessageProps> = ({ text, sender, avatar, senderName }) => (
-    <div className={`${styles.message} ${styles[sender]}`}>
-        <img src={avatar} alt="avatar" className={styles.avatar} />
-        {sender === 'me' && senderName && <span className={styles.senderName}>{senderName}</span>}
-        <p>{text}</p>
-    </div>
-);
 
 export default Dialogs;

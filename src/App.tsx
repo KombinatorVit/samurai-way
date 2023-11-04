@@ -16,8 +16,8 @@ function App() {
                 <Navbar/>
                 <div className={'content'}>
                     
-                    <Route path={'/profile'} component={Profile}/>
-                    <Route path={'/message'} component={Dialogs}/>
+                    <Route exact path={'/profile'} component={Profile}/>
+                    <Route   path={'/message'} component={Dialogs}/>
                     <Route path={'/news'} component={News}/>
                     <Route path={'/music'} component={Music}/>
                     <Route path={'/settings'} component={Settings}/>

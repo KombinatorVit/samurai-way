@@ -1,49 +1,59 @@
 .dialogsContainer {
     display: flex;
-    height: 100%; /* Adjust as needed */
+    height: 100%;
 }
 
 .dialogsList {
-    width: 200px; /* Adjust as needed */
-    background-color: #ececec; /* Your color */
+    width: 200px;
+    background-color: #ececec;
     padding: 20px;
     overflow-y: auto;
 }
 
-/* Other styles remain unchanged */
 
 .dialogItem {
     display: flex;
     align-items: center;
     cursor: pointer;
-    padding: 10px;
+    padding: 10px 15px;
     border-radius: 4px;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: #333;
+    margin-bottom: 8px;
 }
 
-.dialogItem:hover,
+.dialogItem:hover {
+    background-color: #c2e0ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
 .dialogItem.active {
-    background-color: #d0d0d0;
+    background-color: #007bff;
+    color: #fff;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .dialogName {
-    margin-left: 10px; /* Space between avatar and name */
+    margin-left: 10px;
+    font-weight: 500;
 }
 
 .avatar {
-    width: 30px; /* Adjust as needed */
-    height: 30px; /* Adjust as needed */
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
 }
 
 .message.me {
     align-self: flex-end;
-    background-color: #dcf8c6; /* WhatsApp-like color for 'me' messages */
+    background-color: #dcf8c6;
 }
 
 .message.them {
     align-self: flex-start;
-    background-color: #ffffff; /* Different color for 'them' messages */
+    background-color: #ffffff;
 }
 
 
