@@ -1,35 +1,53 @@
-.dialogs {
-    padding: 10px;
-}
-
-.dialogItems {
+.dialogsContainer {
     display: flex;
-    flex-direction: column;
+    height: 100%; /* Adjust as needed */
 }
 
-.dialog {
+.dialogsList {
+    width: 200px; /* Adjust as needed */
+    background-color: #ececec; /* Your color */
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Other styles remain unchanged */
+
+.dialogItem {
     display: flex;
     align-items: center;
+    cursor: pointer;
     padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    background-color: #f0f0f0;
+    border-radius: 4px;
+    transition: background-color 0.3s;
 }
 
-.dialogAvatar {
-    margin-right: 10px;
-}
-
-.dialogAvatar img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-}
-
-.dialogInfo {
-    flex-grow: 1;
+.dialogItem:hover,
+.dialogItem.active {
+    background-color: #d0d0d0;
 }
 
 .dialogName {
+    margin-left: 10px; /* Space between avatar and name */
+}
+
+.avatar {
+    width: 30px; /* Adjust as needed */
+    height: 30px; /* Adjust as needed */
+    border-radius: 50%;
+}
+
+.message.me {
+    align-self: flex-end;
+    background-color: #dcf8c6; /* WhatsApp-like color for 'me' messages */
+}
+
+.message.them {
+    align-self: flex-start;
+    background-color: #ffffff; /* Different color for 'them' messages */
+}
+
+
+.senderName {
+    margin-right: 5px;
     font-weight: bold;
 }
