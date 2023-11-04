@@ -9,7 +9,7 @@ type DialogWindowProps = {
 
 export const DialogWindow: React.FC<DialogWindowProps> = ({ activeDialog }) => (
     <main className={styles.dialogContent}>
-        <Header name={activeDialog?.name} />
+        <HeaderDialog name={activeDialog?.name} />
         <MessageList messages={activeDialog?.messages || []} />
     </main>
 );
@@ -18,7 +18,7 @@ type HeaderProps = {
     name: string | undefined;
 };
 
-export const Header: React.FC<HeaderProps> = ({ name }) => (
+export const HeaderDialog: React.FC<HeaderProps> = ({ name }) => (
     <header className={styles.dialogHeader}>
         {name && <h3>{name}</h3>}
     </header>
