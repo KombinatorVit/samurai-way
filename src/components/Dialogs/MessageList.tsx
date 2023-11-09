@@ -7,13 +7,30 @@ type MessageListProps = {
 };
 type MessageItemProps = MessageData;
 
-export const MessageList: React.FC<MessageListProps> = ({messages}) => (
-    <div className={styles.messages}>
-        {messages.map((message, index) => (
-            <MessageItem key={index} {...message} />
-        ))}
-    </div>
-);
+export const MessageList: React.FC<MessageListProps> = ({messages}) => {
+    
+    const textRefMessage = React.useRef<HTMLTextAreaElement>(null);
+    
+    function addMessage() {
+        if (textRefMessage.current) {
+            let text = textRefMessage.current.value
+            console.log(text)
+            textRefMessage.current.value = '';
+        }
+    }
+    return (
+        <div className={styles.messages}>
+            {messages.map((message, index) => (
+                <React.Fragment key={index}>
+                    <MessageItem  {...message} />
+                
+                
+                </React.Fragment>        ))}
+            <textarea className={styles.messageInput} placeholder="Write something..." ref={textRefMessage}/>
+            <button className={styles.btnSend} onClick={addMessage}>Send</button>
+        </div>
+    );
+}
 
 
 export const MessageItem: React.FC<MessageItemProps> = ({text, sender, avatar, senderName}) => (

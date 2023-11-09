@@ -11,11 +11,16 @@ import {DialogData, PostType} from "./index";
 
 
 type AppPropsType = {
-    data: Array<DialogData>
-    postData: PostType[]
+    state: {
+        dialogsData: DialogData[];
+        postData: PostType[]
+    }
 }
 
 function App(props: AppPropsType) {
+    
+    const {dialogsData, postData} = props.state
+    
     return (
         <BrowserRouter>
             <div className="App">
@@ -23,8 +28,8 @@ function App(props: AppPropsType) {
                 <Navbar/>
                 <div className={'content'}>
                     
-                    <Route exact path={'/profile'} render={() => <Profile postData={props.postData}/>}/>
-                    <Route path={'/message'} render={() => <Dialogs dialogsData={props.data}/>}/>
+                    <Route exact path={'/profile'} render={() => <Profile postData={postData}/>}/>
+                    <Route path={'/message'} render={() => <Dialogs dialogsData={dialogsData}/>}/>
                     <Route path={'/news'} component={News}/>
                     <Route path={'/music'} component={Music}/>
                     <Route path={'/settings'} component={Settings}/>
