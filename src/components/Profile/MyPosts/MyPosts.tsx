@@ -1,19 +1,13 @@
 import React from 'react';
 import styles from './MyPosts.module.css';
 import Post from "./Post/Post";
+import {PostType} from "../../../index";
 
-type PostType = {
-    message: string
-    likeCount: number
-    id: number
+
+type MyPosts = {
+    postData: PostType[]
 }
-
-const PostData: PostType[] = [
-    {message: 'Hello', likeCount: 1, id: 1},
-    {message: 'My first message', likeCount: 2, id: 2},
-]
-
-const MyPosts = () => {
+const MyPosts: React.FC<MyPosts> = ({postData}) => {
     return (
         <div className={styles.myPosts}>
             <h3>My posts</h3>
@@ -25,7 +19,7 @@ const MyPosts = () => {
             
             <div className={styles.posts}>
                 
-                {PostData.map(p => {
+                {postData.map(p => {
                     return <React.Fragment key={p.id}>
                         <Post message={p.message} likeCount={p.likeCount}/>
                     </React.Fragment>

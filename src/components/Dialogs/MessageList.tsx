@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Dialogs.module.css';
-import {MessageData} from "./Dialogs";
+import {MessageData} from "../../index";
 
 type MessageListProps = {
     messages: MessageData[];

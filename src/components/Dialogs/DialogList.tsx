@@ -1,10 +1,10 @@
 import React from 'react';
 import { NavLink } from "react-router-dom";
 import styles from './Dialogs.module.css';
-import {Dialog} from "./Dialogs";
+import {DialogData} from "../../index";
 
 type DialogListProps = {
-    dialogs: Dialog[];
+    dialogs: DialogData[];
     setActiveDialogId: (id: number) => void;
 };
 
