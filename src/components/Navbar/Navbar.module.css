@@ -13,7 +13,7 @@
 .sidebar {
     grid-area: sidebar;
     overflow: auto;
-    background-color: aqua;
+    background-color: #82c095;
     height: 100vh;
 }
 
