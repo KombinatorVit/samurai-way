@@ -1,4 +1,4 @@
-import {DialogData, PostType} from "../index";
+import {DialogData, PostType, rerenderEntireTree} from "../index";
 
 const myName = 'Виталик';
 const myAvatar = '/avaa.jpeg';
@@ -11,12 +11,13 @@ const theirAvatars = [
 ];
 
 
-type StateType = {
+export type StateType = {
     dialogsData: DialogData[];
     postData: PostType[]
+    newPostText: string
 }
 
-export const state:StateType = {
+export const state: StateType = {
     dialogsData: [
         {
             id: 1,
@@ -74,11 +75,24 @@ export const state:StateType = {
         {message: 'My first message', likeCount: 2, id: 2},
         {message: 'My second message', likeCount: 3, id: 3},
         {message: 'My third message', likeCount: 4, id: 4},
-    ]
+    ],
+    newPostText: ''
 }
 
-export function addPost(post: PostType) {
-
-
-
+export function addPost() {
+    state.postData.push({
+        message: state.newPostText,
+        likeCount: 0,
+        id: state.postData.length + 1
+    })
+    state.newPostText = ''
+    rerenderEntireTree(state)
 }
+
+export const updateChangePost = (message: string) => {
+    state.newPostText = message
+    rerenderEntireTree(state)
+}
+
+// @ts-ignore
+window.state = state

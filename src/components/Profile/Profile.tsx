@@ -8,14 +8,17 @@ import {PostType} from "../../index";
 
 type ProfilePropsType = {
     postData:PostType[]
+    addPost: (newPostText: string) => void
+    updateChangePost: (newPostText: string) => void
+    newPostText:string
 }
-const Profile: React.FC<ProfilePropsType> = ({postData}) => {
+const Profile: React.FC<ProfilePropsType> = ({postData,addPost, updateChangePost, newPostText}) => {
     return (
         <div className={styles.profileContent}>
             
             <ProfileInfo/>
             
-            <MyPosts postData={postData}/>
+            <MyPosts postData={postData} addPost={addPost} updateChangePost={updateChangePost} newPostText={newPostText}/>
         
         </div>
     );

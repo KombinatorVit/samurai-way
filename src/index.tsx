@@ -1,7 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import {state} from "./redux/state";
+import ReactDOM from "react-dom";
+import App from "./App";
+import {addPost, state, StateType} from "./redux/state";
+
 
 
 export type MessageData = {
@@ -28,8 +29,12 @@ export type PostType = {
 
 
 
+export function rerenderEntireTree(state: StateType) {
+    ReactDOM.render(
+        <App state={state} addPost={addPost}/>,
+        document.getElementById('root')
+    )
+}
 
-ReactDOM.render(
-    <App state={state}/>,
-    document.getElementById('root')
-);
+
+rerenderEntireTree(state)
