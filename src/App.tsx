@@ -7,23 +7,16 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {DialogData, PostType} from "./index";
-import {state, updateChangePost} from "./redux/state";
+import {StoreType} from "./redux/state";
 
 
 type AppPropsType = {
-    state: {
-        dialogsData: DialogData[];
-        postData: PostType[]
-        
-    },
-    addPost: (newPostText: string) => void
+    store: StoreType
 }
 
 function App(props: AppPropsType) {
     
-    const {dialogsData, postData} = props.state
-    
+    const state = props.store.getState()
     return (
         <BrowserRouter>
             <div className="App">
@@ -31,10 +24,13 @@ function App(props: AppPropsType) {
                 <Navbar/>
                 <div className={'content'}>
                     
-                    <Route exact path={'/profile'} render={() => <Profile postData={postData} addPost={props.addPost} updateChangePost={updateChangePost}
-                                                                          newPostText={state.newPostText}
-                    />}/>
-                    <Route path={'/message'} render={() => <Dialogs dialogsData={dialogsData}/>}/>
+                    <Route exact path={'/profile'}
+                           render={() => <Profile postData={state.postData}
+                                                  addPost={props.store.addPost.bind(props.store)}
+                                                  updateChangePost={props.store.updateChangePost.bind(props.store)}
+                                                  newPostText={state.newPostText}
+                           />}/>
+                    <Route path={'/message'} render={() => <Dialogs dialogsData={state.dialogsData}/>}/>
                     <Route path={'/news'} component={News}/>
                     <Route path={'/music'} component={Music}/>
                     <Route path={'/settings'} component={Settings}/>
@@ -45,5 +41,6 @@ function App(props: AppPropsType) {
         </BrowserRouter>
     );
 }
+
 
 export default App;

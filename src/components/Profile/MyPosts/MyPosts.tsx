@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, {FC} from 'react';
 import styles from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {PostType} from "../../../index";
@@ -10,22 +10,21 @@ type MyPosts = {
     updateChangePost: (newPostText: string) => void
     newPostText: string
 }
-const MyPosts: React.FC<MyPosts> = ({postData, addPost,updateChangePost, newPostText}) => {
+const MyPosts: FC<MyPosts> = ({postData, addPost, updateChangePost, newPostText}) => {
     
-    const inputRef = React.createRef<HTMLTextAreaElement>()
     
     function addPostClick() {
-        if (inputRef.current && inputRef.current.value) {
-            
-            let text = inputRef.current.value
-            
+        
+        let text = newPostText
+        
+        if (text) {
             addPost(text)
         }
         
     }
     
-    function onPostChange(e:ChangeEvent<HTMLTextAreaElement>) {
-        updateChangePost(inputRef.current?.value || '')
+    function onPostChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
+        updateChangePost(e.currentTarget.value)
     }
     
     
@@ -35,7 +34,8 @@ const MyPosts: React.FC<MyPosts> = ({postData, addPost,updateChangePost, newPost
             
             
             <div className={styles.addPost}>
-                <textarea className={styles.postInput} placeholder="Write something..." ref={inputRef} value={newPostText} onChange={onPostChange}/>
+                <textarea className={styles.postInput} placeholder="Write something..."
+                          value={newPostText} onChange={onPostChange}/>
                 <button className={styles.btnAddPost} onClick={addPostClick}>Add post</button>
             </div>
             

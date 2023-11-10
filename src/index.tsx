@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from "react-dom";
 import App from "./App";
-import {addPost, state, StateType} from "./redux/state";
-
+import { store} from "./redux/state";
 
 
 export type MessageData = {
@@ -26,15 +25,14 @@ export type PostType = {
 }
 
 
-
-
-
-export function rerenderEntireTree(state: StateType) {
+function rerenderEntireTree( ) {
     ReactDOM.render(
-        <App state={state} addPost={addPost}/>,
+        <App store={store}/>,
         document.getElementById('root')
     )
 }
 
 
-rerenderEntireTree(state)
+rerenderEntireTree()
+
+store.subscribe(rerenderEntireTree)
