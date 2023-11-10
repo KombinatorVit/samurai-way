@@ -1,6 +1,9 @@
 import {DialogData, PostType} from "../index";
 
 
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+
 const myName = 'Виталик';
 const myAvatar = '/avaa.jpeg';
 const theirAvatars = [
@@ -19,15 +22,22 @@ export type StateType = {
 }
 
 export type StoreType = {
-    addPost: (newPostText: string) => void
-    updateChangePost: (newPostText: string) => void
+
     subscribe: (observer: () => void) => void
     _state: StateType
     getState: () => StateType
-    rerenderEntireTree: () => void
+    callSubscriber: () => void
+    dispatch: (action: any) => void
 }
 
+type AddPostActionCreatorType = {
+    type: typeof ADD_POST
+}
 
+type UpdateNewPostTextActionCreatorType = {
+    type: typeof UPDATE_NEW_POST_TEXT
+    newText: string
+}
 export const store: StoreType = {
     _state: {
         dialogsData: [
@@ -95,30 +105,46 @@ export const store: StoreType = {
         ],
         newPostText: ''
     },
-    rerenderEntireTree() {
+    callSubscriber() {
         console.log('rerender');
         
     },
     subscribe(observer: () => void) {
-        this.rerenderEntireTree = observer;
-    },
-    addPost(newPostText) {
-        this._state.postData.push({
-            message: newPostText,
-            likeCount: 0,
-            id: this._state.postData.length + 1
-        });
-        this._state.newPostText = '';
-        this.rerenderEntireTree();
-    },
-    updateChangePost(message: string) {
-        this._state.newPostText = message;
-        this.rerenderEntireTree();
+        this.callSubscriber = observer;
     },
     
+    
+    dispatch(action: any) {
+        
+        if (action.type === ADD_POST) {
+            this._state.postData.push({
+                message: this._state.newPostText,
+                likeCount: 0,
+                id: this._state.postData.length + 1
+            });
+            this._state.newPostText = '';
+            this.callSubscriber();
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
+            
+            
+            this._state.newPostText = action.newText;
+            this.callSubscriber();
+        }
+        
+        
+    },
     getState() {
         return this._state;
     }
+}
+
+
+export function addPostActionCreator(): AddPostActionCreatorType {
+    return {type: ADD_POST}
+}
+
+export function updateNewPostTextActionCreator(text: string): UpdateNewPostTextActionCreatorType {
+    return {type: UPDATE_NEW_POST_TEXT, newText: text}
 }
 
 // @ts-ignore
