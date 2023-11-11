@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Dialogs.module.css';
 import {DialogData, MessageData} from "../../index";
-import {addMessageActionCreator} from "../../redux/state";
+import {addMessageActionCreator} from "../../redux/reducers/dialogsReducer";
 
 type MessageListProps = {
     messages: MessageData[];

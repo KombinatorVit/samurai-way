@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import styles from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {PostType} from "../../../index";
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/state";
+import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/reducers/postsReducer";
 
 
 type MyPostsProps = {

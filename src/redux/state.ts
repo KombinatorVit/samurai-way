@@ -1,12 +1,10 @@
 import {DialogData, PostType} from "../index";
+import {postsReducer} from "./reducers/postsReducer";
+import {dialogsReducer} from "./reducers/dialogsReducer";
 
 
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const ADD_MESSAGE = 'ADD-MESSAGE';
-
-const myName = 'Виталик';
-const myAvatar = '/avaa.jpeg';
+export const myName = 'Виталик';
+export const myAvatar = '/avaa.jpeg';
 const theirAvatars = [
     'https://placekitten.com/50/50?image=1',
     'https://placekitten.com/50/50?image=2',
@@ -31,14 +29,7 @@ export type StoreType = {
     dispatch: (action: any) => void
 }
 
-type AddPostActionCreatorType = {
-    type: typeof ADD_POST
-}
 
-type UpdateNewPostTextActionCreatorType = {
-    type: typeof UPDATE_NEW_POST_TEXT
-    newText: string
-}
 export const store: StoreType = {
     _state: {
         dialogsData: [
@@ -114,55 +105,15 @@ export const store: StoreType = {
         this.callSubscriber = observer;
     },
     
-    
     dispatch(action: any) {
-        
-        if (action.type === ADD_POST) {
-            this._state.postData.push({
-                message: this._state.newPostText,
-                likeCount: 0,
-                id: this._state.postData.length + 1
-            });
-            this._state.newPostText = '';
-            this.callSubscriber();
-        } else if (action.type === UPDATE_NEW_POST_TEXT) {
-            
-            
-            this._state.newPostText = action.newText;
-            this.callSubscriber();
-        } else if (action.type === ADD_MESSAGE) {
-            const dialogIndex = this._state.dialogsData.findIndex(el => el.id === action.id);
-            
-            if (dialogIndex !== -1) {
-                this._state.dialogsData[dialogIndex].messages.push({
-                    text: action.text,
-                    sender: 'me',
-                    avatar: myAvatar,
-                    senderName: myName,
-                });
-                
-                // Вызываем перерисовку
-                this.callSubscriber();
-            }
-            
-        }},
-        getState()
-        {
-            return this._state;
-        }
+        this._state = postsReducer(this._state, action);
+        // @ts-ignore
+        this._state = dialogsReducer(this._state, action);
+        this.callSubscriber();
+    },
+    getState() {
+        return this._state;
     }
-
-
-export function addPostActionCreator(): AddPostActionCreatorType {
-    return {type: ADD_POST}
-}
-
-export function updateNewPostTextActionCreator(text: string): UpdateNewPostTextActionCreatorType {
-    return {type: UPDATE_NEW_POST_TEXT, newText: text}
-}
-
-export function addMessageActionCreator(text: string, id: number) {
-    return { type: ADD_MESSAGE, text, id };
 }
 
 
