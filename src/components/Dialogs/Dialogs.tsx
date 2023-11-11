@@ -7,8 +7,9 @@ import {DialogData} from "../../index";
 
 type DialogsPropsType = {
     dialogsData: Array<DialogData>
+    dispatch: any
 }
-const Dialogs: React.FC<DialogsPropsType> = ({dialogsData}) => {
+const Dialogs: React.FC<DialogsPropsType> = ({dialogsData,dispatch}) => {
     
     
     const [activeDialogId, setActiveDialogId] = React.useState<number>(dialogsData[1].id);
@@ -18,7 +19,7 @@ const Dialogs: React.FC<DialogsPropsType> = ({dialogsData}) => {
     return (
         <div className={styles.dialogsContainer}>
             <DialogList dialogs={dialogsData} setActiveDialogId={setActiveDialogId}/>
-            <DialogWindow activeDialog={activeDialog}/>
+            <DialogWindow activeDialog={activeDialog} dispatch={dispatch}/>
         </div>
     );
 };

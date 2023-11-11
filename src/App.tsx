@@ -29,7 +29,7 @@ function App(props: AppPropsType) {
                                                   dispatch={props.store.dispatch.bind(props.store)}
                                                   newPostText={state.newPostText}
                            />}/>
-                    <Route path={'/message'} render={() => <Dialogs dialogsData={state.dialogsData}/>}/>
+                    <Route path={'/message'} render={() => <Dialogs dialogsData={state.dialogsData} dispatch={props.store.dispatch.bind(props.store)}/>}/>
                     <Route path={'/news'} component={News}/>
                     <Route path={'/music'} component={Music}/>
                     <Route path={'/settings'} component={Settings}/>

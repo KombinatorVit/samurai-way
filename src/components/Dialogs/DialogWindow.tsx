@@ -5,12 +5,13 @@ import {DialogData} from "../../index";
 
 type DialogWindowProps = {
     activeDialog: DialogData | undefined;
+    dispatch: any
 };
 
-export const DialogWindow: React.FC<DialogWindowProps> = ({activeDialog}) => (
+export const DialogWindow: React.FC<DialogWindowProps> = ({activeDialog, dispatch}) => (
     <main className={styles.dialogContent}>
         <HeaderDialog name={activeDialog?.name}/>
-        <MessageList messages={activeDialog?.messages || []}/>
+        <MessageList messages={activeDialog?.messages || []} dispatch={dispatch} activeDialog={activeDialog}/>
     </main>
 );
 

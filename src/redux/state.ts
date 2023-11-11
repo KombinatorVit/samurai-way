@@ -3,6 +3,7 @@ import {DialogData, PostType} from "../index";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const ADD_MESSAGE = 'ADD-MESSAGE';
 
 const myName = 'Виталик';
 const myAvatar = '/avaa.jpeg';
@@ -22,7 +23,7 @@ export type StateType = {
 }
 
 export type StoreType = {
-
+    
     subscribe: (observer: () => void) => void
     _state: StateType
     getState: () => StateType
@@ -129,14 +130,27 @@ export const store: StoreType = {
             
             this._state.newPostText = action.newText;
             this.callSubscriber();
+        } else if (action.type === ADD_MESSAGE) {
+            const dialogIndex = this._state.dialogsData.findIndex(el => el.id === action.id);
+            
+            if (dialogIndex !== -1) {
+                this._state.dialogsData[dialogIndex].messages.push({
+                    text: action.text,
+                    sender: 'me',
+                    avatar: myAvatar,
+                    senderName: myName,
+                });
+                
+                // Вызываем перерисовку
+                this.callSubscriber();
+            }
+            
+        }},
+        getState()
+        {
+            return this._state;
         }
-        
-        
-    },
-    getState() {
-        return this._state;
     }
-}
 
 
 export function addPostActionCreator(): AddPostActionCreatorType {
@@ -146,6 +160,11 @@ export function addPostActionCreator(): AddPostActionCreatorType {
 export function updateNewPostTextActionCreator(text: string): UpdateNewPostTextActionCreatorType {
     return {type: UPDATE_NEW_POST_TEXT, newText: text}
 }
+
+export function addMessageActionCreator(text: string, id: number) {
+    return { type: ADD_MESSAGE, text, id };
+}
+
 
 // @ts-ignore
 window.store = store
