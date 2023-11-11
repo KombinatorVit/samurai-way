@@ -1,26 +1,24 @@
+import {StateType} from "../state";
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
-type AddPostActionCreatorType = {
-    type: typeof ADD_POST
+export type AddPostActionType = ReturnType<typeof addPostActionCreator>
+
+export type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
+
+export type PostsActionReducerType = AddPostActionType | UpdateNewPostTextActionType
+
+export function addPostActionCreator() {
+    return {type: ADD_POST} as const
 }
 
-type UpdateNewPostTextActionCreatorType = {
-    type: typeof UPDATE_NEW_POST_TEXT
-    newText: string
-}
-
-
-export function addPostActionCreator(): AddPostActionCreatorType {
-    return {type: ADD_POST}
-}
-
-export function updateNewPostTextActionCreator(text: string): UpdateNewPostTextActionCreatorType {
-    return {type: UPDATE_NEW_POST_TEXT, newText: text}
+export function updateNewPostTextActionCreator(text: string) {
+    return {type: UPDATE_NEW_POST_TEXT, newText: text} as const
 }
 
 
-export const postsReducer = (state: any, action: any) => {
+export const postsReducer = (state: StateType, action: PostsActionReducerType) => {
     switch (action.type) {
         case ADD_POST:
             return {

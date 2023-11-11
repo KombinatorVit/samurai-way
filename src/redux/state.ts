@@ -1,6 +1,6 @@
 import {DialogData, PostType} from "../index";
-import {postsReducer} from "./reducers/postsReducer";
-import {dialogsReducer} from "./reducers/dialogsReducer";
+import { postsReducer} from "./reducers/postsReducer";
+import { dialogsReducer} from "./reducers/dialogsReducer";
 
 
 export const myName = 'Виталик';
@@ -105,10 +105,10 @@ export const store: StoreType = {
         this.callSubscriber = observer;
     },
     
-    dispatch(action: any) {
+    dispatch(action: any)   {
         this._state = postsReducer(this._state, action);
-        // @ts-ignore
-        this._state = dialogsReducer(this._state, action);
+         // @ts-ignore
+        this._state=dialogsReducer(this._state, action);
         this.callSubscriber();
     },
     getState() {
